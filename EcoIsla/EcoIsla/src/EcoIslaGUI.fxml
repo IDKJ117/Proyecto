@@ -12,7 +12,6 @@
             <children>
                 <Label text="Embarcación:"/>
                 <ComboBox fx:id="comboEmbarcacion" prefWidth="150"/>
-
                 <Label text="Horario:"/>
                 <ComboBox fx:id="comboHorario" prefWidth="150"/>
             </children>
@@ -20,25 +19,15 @@
     </top>
 
     <center>
-        <GridPane fx:id="gridAsientos" hgap="5" vgap="5"/>
+        <GridPane fx:id="grid" hgap="5" vgap="5"/>
     </center>
 
     <bottom>
         <VBox spacing="5">
             <children>
-                <Label fx:id="lblAsientosSeleccionados"
-                       text="Asientos seleccionados: (ninguno)"/>
-                <Label fx:id="lblTotal"
-                       text="Total a pagar: $0"/>
-
-                <HBox spacing="10">
-                    <children>
-                        <Button text="Confirmar compra"
-                                onAction="#confirmarCompra"/>
-                        <Button text="Ver resumen del día"
-                                onAction="#verResumen"/>
-                    </children>
-                </HBox>
+                <Label fx:id="lblAsientos" text="Asientos seleccionados: "/>
+                <Label fx:id="lblTotal" text="Total: $0"/>
+                <Button text="Confirmar compra" onAction="#confirmar"/>
             </children>
         </VBox>
     </bottom>
