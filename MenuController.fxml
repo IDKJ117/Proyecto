@@ -1,0 +1,81 @@
+package Proyecto;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+import javafx.application.Platform;
+
+import java.io.*;
+
+public class MenuController {
+
+    @FXML
+    public void abrirVenta() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("EcoIslaGUI.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("EcoIsla Viajes - Venta de boletos");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            mostrarError("No se pudo abrir la ventana de venta: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void abrirResumen() {
+        File archivo = new File("ventas.txt");
+        if (!archivo.exists()) {
+            mostrarInfo("Resumen de ventas", "Todavía no hay ventas registradas.");
+            return;
+        }
+
+        StringBuilder texto = new StringBuilder();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                texto.append(linea).append("\n");
+            }
+        } catch (IOException e) {
+            mostrarError("Error al leer el archivo: " + e.getMessage());
+            return;
+        }
+
+        TextArea area = new TextArea(texto.toString());
+        area.setEditable(false);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Resumen de ventas por embarcación y horario");
+        alert.setHeaderText(null);
+        alert.getDialogPane().setContent(area);
+        alert.showAndWait();
+    }
+
+    @FXML
+    public void salir() {
+        Platform.exit();
+    }
+
+    private void mostrarError(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
+
+    private void mostrarInfo(String titulo, String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
+}

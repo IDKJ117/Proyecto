@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="EcoIslaController">
+
+    <top>
+        <HBox spacing="10">
+            <children>
+                <Label text="Embarcación:"/>
+                <ComboBox fx:id="comboEmbarcacion" prefWidth="150"/>
+
+                <Label text="Horario:"/>
+                <ComboBox fx:id="comboHorario" prefWidth="150"/>
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <GridPane fx:id="gridAsientos" hgap="5" vgap="5"/>
+    </center>
+
+    <bottom>
+        <VBox spacing="5">
+            <children>
+                <Label fx:id="lblAsientosSeleccionados"
+                       text="Asientos seleccionados: (ninguno)"/>
+                <Label fx:id="lblTotal"
+                       text="Total a pagar: $0"/>
+
+                <HBox spacing="10">
+                    <children>
+                        <Button text="Confirmar compra"
+                                onAction="#confirmarCompra"/>
+                        <Button text="Ver resumen del día"
+                                onAction="#verResumen"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </bottom>
+
+</BorderPane>
